@@ -3,9 +3,14 @@ package app;
 import builder.ItineraryBuilder;
 import builder.TravelDirector;
 import builder.TravelPackageObjectBuilder;
+import facade.TravelBookingFacade;
+import model.TravelPackage;
 import factory.AdventurePackageFactory;
 import factory.BeachPackageFactory;
 import factory.TravelPackageFactory;
+import observer.BookingConfirmationObserver;
+import observer.BookingCounterObserver;
+import observer.BookingNotifier;
 import strategy.LastMinuteSurchargeStrategy;
 import strategy.LongStayDiscountStrategy;
 import strategy.PriceCalculator;
@@ -50,5 +55,19 @@ public class Main {
             System.out.println("  Beach:     $" + beach.createPackage(calculator).getTotalPrice());
             System.out.println("  Adventure: $" + adventure.createPackage(calculator).getTotalPrice());
         }
+
+        // --- Facade + Observer: one call books a trip and notifies listeners ---
+        System.out.println("--- Facade + Observer ---");
+        BookingNotifier notifier = new BookingNotifier();
+        BookingConfirmationObserver confirmation = new BookingConfirmationObserver();
+        BookingCounterObserver counter = new BookingCounterObserver();
+        notifier.subscribe(confirmation);
+        notifier.subscribe(counter);
+
+        TravelBookingFacade bookingFacade = new TravelBookingFacade(notifier);
+        TravelPackage bookedTrip = bookingFacade.bookBeachTrip(
+                new PriceCalculator(new SeasonalDiscountStrategy(10)));
+        System.out.println("Package returned to client: " + bookedTrip);
     }
 }
+
