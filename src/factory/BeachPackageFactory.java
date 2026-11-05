@@ -5,10 +5,16 @@ import model.TravelPackage;
 import strategy.PriceCalculator;
 
 public class BeachPackageFactory extends TravelPackageFactory {
+
     @Override
     public TravelPackage createPackage(PriceCalculator calculator) {
-        TravelPackageObjectBuilder builder = new TravelPackageObjectBuilder();
+        validateCalculator(calculator);
+
+        TravelPackageObjectBuilder builder =
+                new TravelPackageObjectBuilder();
+
         director.makeBeachVacation(builder, calculator);
+
         return builder.getResult();
     }
 }
