@@ -1,6 +1,6 @@
 package strategy;
 
-/** Peak-season / last-minute booking: +20% on top of the base price. */
+/** Last-minute booking: +20% surcharge on the base price. */
 public class LastMinuteSurchargeStrategy implements PricingStrategy {
 
     private static final double SURCHARGE = 0.20;

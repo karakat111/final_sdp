@@ -1,12 +1,12 @@
 package observer;
 
-import model.TravelPackage;
+import model.Trip;
 
 public class BookingCounterObserver implements BookingObserver {
     private int bookingCount;
 
     @Override
-    public void update(TravelPackage travelPackage) {
+    public void update(Trip trip) {
         bookingCount++;
         System.out.println("Bookings received: " + bookingCount);
     }
@@ -15,3 +15,4 @@ public class BookingCounterObserver implements BookingObserver {
         return bookingCount;
     }
 }
+

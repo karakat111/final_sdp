@@ -1,28 +1,27 @@
-package src.decorator;
+package decorator;
 
 import model.Trip;
 
-/** Decorator base: wraps a Trip and delegates to it; subclasses add an extra service. */
+/** Base decorator that forwards the basic trip information. */
 public abstract class TripDecorator implements Trip {
+    protected final Trip trip;
 
-    protected final Trip wrapped;
-
-    protected TripDecorator(Trip wrapped) {
-        if (wrapped == null) throw new IllegalArgumentException("Trip is required");
-        this.wrapped = wrapped;
+    protected TripDecorator(Trip trip) {
+        this.trip = trip;
     }
 
     @Override
-    public String getDescription() {
-        return wrapped.getDescription();
+    public String getDestination() {
+        return trip.getDestination();
     }
 
     @Override
     public double getTotalPrice() {
-        return wrapped.getTotalPrice();
+        return trip.getTotalPrice();
     }
 
-    protected static double round(double value) {
-        return Math.round(value * 100.0) / 100.0;
+    @Override
+    public String getDescription() {
+        return trip.getDescription();
     }
 }

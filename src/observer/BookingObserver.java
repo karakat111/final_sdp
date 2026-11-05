@@ -1,7 +1,8 @@
 package observer;
 
-import model.TravelPackage;
+import model.Trip;
 
 public interface BookingObserver {
-    void update(TravelPackage travelPackage);
+    void update(Trip trip);
 }
+
