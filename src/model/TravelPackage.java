@@ -3,9 +3,9 @@ package model;
 import java.util.Collections;
 import java.util.List;
 
-public final class TravelPackage {
-
-    private final String destination, hotel;
+public final class TravelPackage implements Trip {
+    private final String destination;
+    private final String hotel;
     private final int nights;
     private final List<String> activities;
     private final double totalPrice;
@@ -18,11 +18,18 @@ public final class TravelPackage {
         this.totalPrice = totalPrice;
     }
 
+    @Override
     public String getDestination() { return destination; }
     public int getNights() { return nights; }
     public String getHotel() { return hotel; }
     public List<String> getActivities() { return activities; }
+    @Override
     public double getTotalPrice() { return totalPrice; }
+
+    @Override
+    public String getDescription() {
+        return destination + ", " + nights + " nights, " + hotel + ", activities: " + activities;
+    }
 
     @Override
     public String toString() {
