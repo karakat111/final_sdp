@@ -2,7 +2,7 @@ package observer;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.TravelPackage;
+import model.Trip;
 
 public class BookingNotifier {
     private final List<BookingObserver> observers = new ArrayList<>();
@@ -15,9 +15,10 @@ public class BookingNotifier {
         observers.remove(observer);
     }
 
-    public void notifyObservers(TravelPackage travelPackage) {
+    public void notifyObservers(Trip trip) {
         for (BookingObserver observer : observers) {
-            observer.update(travelPackage);
+            observer.update(trip);
         }
     }
 }
+
