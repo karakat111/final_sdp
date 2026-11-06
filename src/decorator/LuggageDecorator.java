@@ -1,4 +1,4 @@
-package src.decorator;
+package decorator;
 
 import model.Trip;
 
@@ -18,6 +18,6 @@ public class LuggageDecorator extends TripDecorator {
 
     @Override
     public double getTotalPrice() {
-        return round(super.getTotalPrice() + PRICE);
+        return Math.round((super.getTotalPrice() + PRICE) * 100.0) / 100.0;
     }
 }
