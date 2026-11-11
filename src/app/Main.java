@@ -18,6 +18,9 @@ import strategy.PricingStrategy;
 import strategy.RegularPricingStrategy;
 import strategy.SeasonalDiscountStrategy;
 
+import java.awt.Desktop;
+import java.net.URI;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -25,6 +28,16 @@ public class Main {
         demoFactory();
         demoStrategy();
         demoFacadeObserver();
+
+        try {
+            TravelWebServer.start();
+            System.out.println("Website running at http://127.0.0.1:" + Integer.getInteger("travel.port", 8765) + "");
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(URI.create("http://127.0.0.1:" + Integer.getInteger("travel.port", 8765) + ""));
+            }
+        } catch (Exception e) {
+            System.err.println("Could not start website: " + e.getMessage());
+        }
     }
 
     // =========================
